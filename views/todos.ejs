@@ -3,6 +3,9 @@
   <head>
     <title>Todo</title>
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/vader/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
@@ -15,5 +18,22 @@
       <li><%= todos[i].get('content') %></li>
       <% } %>
     </ul>
+    
+    <br>
+    <form action="/todos/key" method="POST">
+      <p>Date: <input type="text" name="date" id="datepicker"></p>
+      <select name="project">
+          <% for(var i=0; i<todos.length; i++) {%>
+            <option value=<%= todos[i].get('key') %>><%= todos[i].get('content') %></option>
+          <% } %>
+      </select>      
+      <input type="submit" value="查询" />
+    </form>
+    
   </body>
+  <script>
+    $( function() {
+      $( "#datepicker" ).datepicker();
+    } );
+  </script>    
 </html>
